@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Asteroid : MonoBehaviour {
-    public float speed = 10.0f;
+    public float speed = 1.0f;
     private Rigidbody2D rb;
     private Vector2 screenBounds;
 
@@ -18,7 +18,7 @@ public class Asteroid : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        if(transform.position.x < screenBounds.x * 2){
+        if(transform.position.y < screenBounds.y * 2){
             Destroy(this.gameObject);
         }
     }
