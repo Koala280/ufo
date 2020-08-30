@@ -7,9 +7,9 @@ public class Touchmovement : MonoBehaviour
     private Vector3 touchPosition;
     private Rigidbody2D rb;
     private Vector3 direction;
-    private float moveTouchSpeed = 10f;
-    public float cameraSpeed = 1f;
+    private float charMovementSpeed = 10f;
     public GameObject gameOverText, restartButton, mainMenuButton;
+
 
     // Start is called before the first frame update
     //use this for initialization
@@ -24,23 +24,31 @@ public class Touchmovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        /* Increase Camera Movement Speed depending on y Position*/
+        /* TODO sollte es in Update sein? muss nur ein mal abgefragt werden */
+        GameObject mainCamera = GameObject.Find("Main Camera");
+        CameraMovement cameraMovementScript = mainCamera.GetComponent<CameraMovement>();
+        
         if (Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(0);
             touchPosition = Camera.main.ScreenToWorldPoint(touch.position);
             touchPosition.z = 0;
             direction = (touchPosition - transform.position);
-            rb.velocity = new Vector2(direction.x, direction.y) * moveTouchSpeed;
+            cameraMovementScript.speed += direction.y / 100;
+            rb.velocity = new Vector2(direction.x, direction.y) * charMovementSpeed;
 
             if (touch.phase == TouchPhase.Ended)
             {
                 rb.velocity = Vector2.zero;
             }
         } else {
-            transform.Translate(0, cameraSpeed * Time.deltaTime, 0);
+            /* Move with same Speed as Camera */
+            transform.Translate(0, cameraMovementScript.speed * Time.deltaTime, 0);
         }
     }
 
+    /* Game Over if collide with Tag: Asteroid */
     void OnCollisionEnter2D(Collision2D col) {
         if(col.gameObject.tag.Equals("Asteroid")) {
             gameOverText.SetActive(true);

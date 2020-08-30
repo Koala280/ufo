@@ -5,7 +5,6 @@ using UnityEngine;
 public class spawnAsteroids : MonoBehaviour
 {
     public GameObject[] asteroidPrefab;
-    public float respawnTime = 1.0f;
     private Vector2 screenBounds;
 
     void Start()
@@ -15,14 +14,14 @@ public class spawnAsteroids : MonoBehaviour
     private void spawnEnemy()
     {
         GameObject a = Instantiate(asteroidPrefab[Random.Range(0, asteroidPrefab.Length)]) as GameObject;
-        a.transform.position = new Vector3(Random.Range(-screenBounds.x * 2, screenBounds.x * 2), screenBounds.y * 2, -3);
+        a.transform.position = new Vector3(Random.Range(-screenBounds.x, screenBounds.x), screenBounds.y * 2, -7);
     }
     IEnumerator asteroidWave()
     {
         while (true)
         {
             screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
-            yield return new WaitForSeconds(respawnTime);
+            yield return new WaitForSeconds(Random.Range(1, 7));
             spawnEnemy();
         }
     }
