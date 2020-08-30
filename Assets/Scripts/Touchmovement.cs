@@ -19,23 +19,26 @@ public class Touchmovement : MonoBehaviour
         restartButton.SetActive(false);
         mainMenuButton.SetActive(false);
         rb = GetComponent<Rigidbody2D>();
+
     }
 
     // Update is called once per frame
     void Update()
     {
         /* Increase Camera Movement Speed depending on y Position*/
-        /* TODO sollte es in Update sein? muss nur ein mal abgefragt werden */
+        /* TODO ausm Update auslagern */
         GameObject mainCamera = GameObject.Find("Main Camera");
         CameraMovement cameraMovementScript = mainCamera.GetComponent<CameraMovement>();
         
+        /* If Touch the Screen */
         if (Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(0);
             touchPosition = Camera.main.ScreenToWorldPoint(touch.position);
             touchPosition.z = 0;
             direction = (touchPosition - transform.position);
-            cameraMovementScript.speed += direction.y / 100;
+            /* TODO FIX */
+            cameraMovementScript.speed += direction.y / 50;
             rb.velocity = new Vector2(direction.x, direction.y) * charMovementSpeed;
 
             if (touch.phase == TouchPhase.Ended)
@@ -43,7 +46,7 @@ public class Touchmovement : MonoBehaviour
                 rb.velocity = Vector2.zero;
             }
         } else {
-            /* Move with same Speed as Camera */
+            /* Move Char with same Speed as Camera */
             transform.Translate(0, cameraMovementScript.speed * Time.deltaTime, 0);
         }
     }
