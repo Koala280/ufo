@@ -4,8 +4,14 @@ using UnityEngine;
 
 public class CameraMovement : MonoBehaviour
 {
-    public float speed = 1f;
-    void Update() {
-       transform.Translate(0, speed * Time.deltaTime, 0);
+    public static CameraMovement instace;
+    public float speed;
+    void Start()
+    {
+        instace = this;
+    }
+    void Update()
+    {
+        transform.Translate(0, speed * Time.deltaTime, 0);
     }
 }

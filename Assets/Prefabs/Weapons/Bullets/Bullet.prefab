@@ -143,8 +143,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cf599c21f5b3924fb1374cd02126329, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 15
-  respawnTime: 1
+  speed: 25
   rb: {fileID: 7667934665321943521}
-  heightThreshold: {x: 0, y: 0}
-  widthThreshold: {x: 0, y: 0}

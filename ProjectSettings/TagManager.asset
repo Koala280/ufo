@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Asteroid
   - Weapon
+  - Raygun
   layers:
   - Default
   - TransparentFX

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class backgroundLoop : MonoBehaviour{
     public GameObject[] levels;
-    private Camera mainCamera;
     private Vector2 screenBounds;
     public float choke;
     public float scrollSpeed;
@@ -12,21 +11,20 @@ public class backgroundLoop : MonoBehaviour{
     private Vector3 lastScreenPosition;
 
     void Start(){
-        mainCamera = gameObject.GetComponent<Camera>();
-        screenBounds = mainCamera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, mainCamera.transform.position.z));
+        screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
         foreach(GameObject obj in levels){
             loadChildObjects(obj);
         }
         lastScreenPosition = transform.position;
     }
     void loadChildObjects(GameObject obj){
-        float objectWidth = obj.GetComponent<SpriteRenderer>().bounds.size.x - choke;
-        int childsNeeded = (int)Mathf.Ceil(screenBounds.x * 2 / objectWidth);
+        float objectHeight = obj.GetComponent<SpriteRenderer>().bounds.size.y - choke;
+        int childsNeeded = (int)Mathf.Ceil(screenBounds.y * 2 / objectHeight);
         GameObject clone = Instantiate(obj) as GameObject;
         for(int i = 0; i <= childsNeeded; i++){
             GameObject c = Instantiate(clone) as GameObject;
             c.transform.SetParent(obj.transform);
-            c.transform.position = new Vector3(objectWidth * i, obj.transform.position.y, obj.transform.position.z);
+            c.transform.position = new Vector3(obj.transform.position.x, objectHeight * i, obj.transform.position.z);
             c.name = obj.name + i;
         }
         Destroy(clone);

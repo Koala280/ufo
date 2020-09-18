@@ -2,22 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Asteroid : MonoBehaviour {
+public class Asteroid : MonoBehaviour
+{
     public float speed = 1.0f;
     private Rigidbody2D rb;
-    private Vector2 screenBounds;
-
+    private GameObject deletepoint;
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
         rb = this.GetComponent<Rigidbody2D>();
         rb.velocity = new Vector2(0, -speed);
-        screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
+        deletepoint = GameObject.Find("Deletepoint");
     }
 
     // Update is called once per frame
-    void Update () {
-        if(transform.position.y * 2 < screenBounds.y){
+    void Update()
+    {
+        if (transform.position.y < deletepoint.transform.position.y)
+        {
             Destroy(this.gameObject);
         }
     }

@@ -4,50 +4,76 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
+    public GameObject gameOverText, restartButton, mainMenuButton;
     public Transform firePoint;
-    public GameObject bulletPrefab;
-    public float respawnTime = 1f;
-    private float cd_Raygun = 0;
+    public GameObject bullet_prefab;
+    private float raygun_cd_left = 0;
+    public float raygun_shooting_repeat_rate = 1.0f;
+    public float raygun_cooldown = 15.0f;
+    private float star_cd_left = 0;
+    public float star_cooldown = 10.0f;
 
-    void Update() {
-        if (cd_Raygun > 0)
+    private void Start()
+    {
+        gameOverText.SetActive(false);
+        restartButton.SetActive(false);
+        mainMenuButton.SetActive(false);
+    }
+
+    void Update()
+    {
+        /* Cooldown Timer */
+        if (raygun_cd_left >= 0)
         {
-            cd_Raygun -= Time.deltaTime;
+            raygun_cd_left -= Time.deltaTime;
+        }
+        if (star_cd_left >= 0)
+        {
+            star_cd_left -= Time.deltaTime;
         }
     }
 
-    public bool Pickup(GameObject obj) {
+    public void Pickup(GameObject obj)
+    {
         switch (obj.tag)
         {
-            case "Weapon":
-            return true;
-
-            default:
-            Debug.LogWarning($"WARNING: no Handler implemented for object Tag: {obj.tag}!!!");
-            return false;
-        }
-    }
-
-    public void PickedUp(GameObject obj) {
-        switch (obj.name)
-        {
             case "Raygun":
-                cd_Raygun = 15;
-                InvokeRepeating("LaunchProjectile", 1.0f, 1.0f);
-            break;
+                /* Start cooldown */
+                raygun_cd_left += raygun_cooldown;
+                /* Start shooting loop */
+                InvokeRepeating("Raygun_shoot", 0.1f, raygun_shooting_repeat_rate);
+                break;
+            case "Star":
+                star_cd_left += star_cooldown;
+                break;
 
             default:
-            Debug.LogWarning($"WARNING: no Handler implemented for object Tag: {obj.tag}!!!");
-            break;
+                Debug.LogWarning($"WARNING: no Handler implemented for object tag: {obj.tag}!!!");
+                break;
         }
     }
 
-    private void LaunchProjectile()
+    private void Raygun_shoot()
     {
-        Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
-        if (cd_Raygun <= 0)
+        /* Spawn Bullet */
+        Instantiate(bullet_prefab, firePoint.position, firePoint.rotation);
+        /* When cooldown is ready stop loop */
+        if (raygun_cd_left <= 0)
         {
-            CancelInvoke("LaunchProjectile");
+            CancelInvoke("Raygun_shoot");
+        }
+    }
+
+    /* Game Over if collide with Tag: Asteroid */
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        if (col.gameObject.tag.Equals("Asteroid"))
+        {
+            gameOverText.SetActive(true);
+            restartButton.SetActive(true);
+            mainMenuButton.SetActive(true);
+            gameObject.SetActive(false);
+            raygun_cd_left = 0;
         }
     }
 }

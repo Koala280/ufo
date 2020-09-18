@@ -5,11 +5,8 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     public float speed = 15f;
-    public float respawnTime = 1.0f;
     public Rigidbody2D rb;
-    private Camera mainCamera;
-    public Vector2 heightThreshold;
-    public Vector2 widthThreshold;
+    private Vector2 screenBounds;
 
     void Start()
     {
@@ -17,23 +14,27 @@ public class Bullet : MonoBehaviour
         rb.velocity = transform.up * speed;
     }
 
-    void Update() {
-        Vector2 screenPosition = Camera.main.WorldToScreenPoint(transform.position);
-        if (screenPosition.y > Screen.height + 90 || screenPosition.y < 0 )
+    void Update()
+    {
+        screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
+        if (rb.position.y > screenBounds.y + 1)
         {
             Destroy(gameObject);
         }
     }
 
-    void OnTriggerEnter2D(Collider2D col) {
-        if(col.gameObject.tag.Equals("Asteroid"))
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.gameObject.tag.Equals("Asteroid"))
         {
+            Score.instace.score_add += 100;
             Destroy(col.gameObject);
             Destroy(gameObject);
-        } else if (!col.gameObject.tag.Equals("Player")) /* FirePoint is on Player */
+        }/* No Need bcs other objects shouldnt destroy bullet
+        else if (!col.gameObject.tag.Equals("Player")) /* FirePoint is on Player so he couldnt get killed 
         {
             Destroy(gameObject);
-        }
+        } */
     }
 
 }

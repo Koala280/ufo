@@ -8,13 +8,8 @@ public class Pickup : MonoBehaviour
        PlayerManager manager = collision.GetComponent<PlayerManager>();
        if (manager)
        {
-           bool pickedUp = manager.Pickup(gameObject);
-
-           if (pickedUp)
-           {
-                Destroy(gameObject);
-                manager.PickedUp(gameObject);
-           }
+            Destroy(gameObject);
+            manager.Pickup(gameObject);
        }
    }
 }
