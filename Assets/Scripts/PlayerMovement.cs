@@ -7,8 +7,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 touchPosition;
     private Rigidbody2D rb;
     private Vector3 direction;
-    private float charMovementSpeed = 10f;
-    public GameObject cameraBottom;
+    public float charMovementSpeed;
 
 
     private void Start()
@@ -19,8 +18,6 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        /* Increase Camera Movement Speed depending on y Position*/
-        CameraMovement.instace.speed = (Camera.main.transform.position.y / 150) + (rb.position.y - cameraBottom.transform.position.y) / 7;
 
         /* If Touch the Screen */
         if (Input.touchCount > 0)
@@ -35,11 +32,6 @@ public class PlayerMovement : MonoBehaviour
             {
                 rb.velocity = Vector2.zero;
             }
-        }
-        else
-        {
-            /* Move Char with same Speed as Camera */
-            transform.Translate(0, CameraMovement.instace.speed * Time.deltaTime, 0);
         }
     }
 }

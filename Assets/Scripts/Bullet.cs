@@ -27,14 +27,10 @@ public class Bullet : MonoBehaviour
     {
         if (col.gameObject.tag.Equals("Asteroid"))
         {
-            Score.instace.score_add += 100;
+            Score.instance.score_value += 500;
             Destroy(col.gameObject);
             Destroy(gameObject);
-        }/* No Need bcs other objects shouldnt destroy bullet
-        else if (!col.gameObject.tag.Equals("Player")) /* FirePoint is on Player so he couldnt get killed 
-        {
-            Destroy(gameObject);
-        } */
+        }
     }
 
 }
