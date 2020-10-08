@@ -22,14 +22,17 @@ public class Shop : MonoBehaviour
 
     void Start()
     {
+        /* Get Money Value */
         money_value = PlayerPrefs.GetInt("money", 0);
         money_txt.SetText($"Current Value: {money_value}");
 
+        /* Get Raygun LVL and price */
         raygun_lvl = PlayerPrefs.GetInt("raygun_lvl", 1);
         raygun_lvl_txt.SetText($"{raygun_lvl}");
         raygun_price = raygun_lvl * raygun_lvl_price;
         raygun_price_txt.SetText($"{raygun_price}");
 
+        /* Get Star LVL and Price */
         star_lvl = PlayerPrefs.GetInt("star_lvl", 1);
         star_lvl_txt.SetText($"{star_lvl}");
         star_price = star_lvl * star_lvl_price;
@@ -62,18 +65,21 @@ public class Shop : MonoBehaviour
         /* till lvl 9. faster to fire is impossible */
         if (money_value >= star_price)
         {
+            /* Increase Star Running time and Size */
             PlayerPrefs.SetFloat("star_cooldown", PlayerPrefs.GetFloat("star_cooldown", 10.0f) + 1.0f);
-            /* TODO STERNGRÖßE vergrößern */    
-            PlayerPrefs.SetFloat("star_size", PlayerPrefs.GetFloat("star_shooting_repeat_rate", 1.0f) - 0.1f);
+            PlayerPrefs.SetFloat("star_size", PlayerPrefs.GetFloat("star_size", 1.0f) + 0.05f);
 
+            /* LVL Up the star */
             star_lvl += 1;
             PlayerPrefs.SetInt("star_lvl", star_lvl);
             star_lvl_txt.SetText($"{star_lvl}");
 
+            /* decrease Money value by star price */
             money_value -= star_price;
             PlayerPrefs.SetInt("money", money_value);
             money_txt.SetText($"Current Value: {money_value}");
 
+            /* Update new Star price */
             star_price = star_lvl * star_lvl_price;
             star_price_txt.SetText($"{star_price}");
         }

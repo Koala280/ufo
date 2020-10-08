@@ -74,10 +74,11 @@ public class PlayerManager : MonoBehaviour
 
     void Star_attack()
     {
+        /* Spawn Picked Up Star */
         Instantiate(star_picked_prefab, transform.position, transform.rotation);
         GameSpeed.instance.gameSpeed += star_speed;
         supermode = true;
-        star_picked_prefab = GameObject.Find("Star_Picked_Prefab Variant(Clone)");
+        star_picked_prefab = GameObject.Find("Star_Picked_Prefab(Clone)");
     }
 
     private void Raygun_shoot()
@@ -108,7 +109,6 @@ public class PlayerManager : MonoBehaviour
             
         }
     }
-
 
     void GameOver()
     {
