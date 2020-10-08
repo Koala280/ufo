@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-
 public class Shop : MonoBehaviour
 {
 
@@ -12,8 +11,14 @@ public class Shop : MonoBehaviour
     public TextMeshProUGUI raygun_lvl_txt;
     private int raygun_price;
     public TextMeshProUGUI raygun_price_txt;
+    private int star_lvl;
+    public TextMeshProUGUI star_lvl_txt;
+    private int star_price;
+    public TextMeshProUGUI star_price_txt;
     private float raygun_shooting_repeat_rate;
     private float raygun_cooldown;
+    public int raygun_lvl_price;
+    public int star_lvl_price;
 
     void Start()
     {
@@ -22,8 +27,13 @@ public class Shop : MonoBehaviour
 
         raygun_lvl = PlayerPrefs.GetInt("raygun_lvl", 1);
         raygun_lvl_txt.SetText($"{raygun_lvl}");
-        raygun_price = raygun_lvl * 5000;
+        raygun_price = raygun_lvl * raygun_lvl_price;
         raygun_price_txt.SetText($"{raygun_price}");
+
+        star_lvl = PlayerPrefs.GetInt("star_lvl", 1);
+        star_lvl_txt.SetText($"{star_lvl}");
+        star_price = star_lvl * star_lvl_price;
+        star_price_txt.SetText($"{star_price}");
     }
 
     public void UpgradeRaygun()
@@ -42,8 +52,30 @@ public class Shop : MonoBehaviour
             PlayerPrefs.SetInt("money", money_value);
             money_txt.SetText($"Current Value: {money_value}");
 
-            raygun_price = raygun_lvl * 10000;
+            raygun_price = raygun_lvl * raygun_lvl_price;
             raygun_price_txt.SetText($"{raygun_price}");
+        }
+    }
+
+    public void UpgradeStar()
+    {
+        /* till lvl 9. faster to fire is impossible */
+        if (money_value >= star_price)
+        {
+            PlayerPrefs.SetFloat("star_cooldown", PlayerPrefs.GetFloat("star_cooldown", 10.0f) + 1.0f);
+            /* TODO STERNGRÖßE vergrößern */    
+            PlayerPrefs.SetFloat("star_size", PlayerPrefs.GetFloat("star_shooting_repeat_rate", 1.0f) - 0.1f);
+
+            star_lvl += 1;
+            PlayerPrefs.SetInt("star_lvl", star_lvl);
+            star_lvl_txt.SetText($"{star_lvl}");
+
+            money_value -= star_price;
+            PlayerPrefs.SetInt("money", money_value);
+            money_txt.SetText($"Current Value: {money_value}");
+
+            star_price = star_lvl * star_lvl_price;
+            star_price_txt.SetText($"{star_price}");
         }
     }
 }

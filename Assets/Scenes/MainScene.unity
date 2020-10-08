@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 4889521}
   - component: {fileID: 4889525}
   - component: {fileID: 4889522}
+  - component: {fileID: 4889527}
   - component: {fileID: 4889526}
   m_Layer: 0
   m_Name: Player
@@ -162,7 +163,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Constraints: 0
 --- !u!114 &4889522
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -176,9 +177,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   charMovementSpeed: 15
-  cameraBottom: {fileID: 2125808603}
-  speedCameraPosition: 100
-  speedPlayerPosition: 3.5
 --- !u!212 &4889523
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -421,6 +419,24 @@ MonoBehaviour:
   bullet_1_prefab: {fileID: 287370730400357127, guid: d25ae77bb5d4a5e4e95a07cfe96dd32c,
     type: 3}
   bullet_2_prefab: {fileID: 0}
+  star_picked_prefab: {fileID: 3795930228927904783, guid: db930ec22e6550f4497e8e01a50364a1,
+    type: 3}
+--- !u!114 &4889527
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4889520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f82372674b0e21040bec3cd19f44d998, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraBottom: {fileID: 2125808603}
+  gameSpeed: 0
+  speedCameraPosition: 0
+  speed_playerposition: 0
 --- !u!1 &82705930
 GameObject:
   m_ObjectHideFlags: 0
@@ -589,7 +605,6 @@ GameObject:
   - component: {fileID: 352276160}
   - component: {fileID: 352276159}
   - component: {fileID: 352276158}
-  - component: {fileID: 352276162}
   m_Layer: 5
   m_Name: Game_Over_Canvas
   m_TagString: Untagged
@@ -679,18 +694,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &352276162
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 352276157}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c26192c81caea0449b6831d0b060ec0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &384690124
 GameObject:
   m_ObjectHideFlags: 0
@@ -935,7 +938,6 @@ MonoBehaviour:
   - {fileID: 1468473537828044286, guid: 0f8625419576b0c4786f743523afef24, type: 3}
   - {fileID: 2138269332925303447, guid: d1ec891460cf0aa42abd8d2c2feabfef, type: 3}
   weapon_prefabs:
-  - {fileID: 205633364510221482, guid: 9af809ecaf1d1214aa199cb5bbfdd411, type: 3}
   - {fileID: 5581193685041413311, guid: 6be9a6226897adf448063408fb186d78, type: 3}
 --- !u!1 &564054430
 GameObject:
@@ -1120,10 +1122,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 706782815}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d12601ad7b95a0489d3b0cff0130d89, type: 3}
+  m_Script: {fileID: 11500000, guid: 8c00812f1bacfc440bd43524e6883e23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0
 --- !u!212 &706782817
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1358,8 +1359,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   score_value: 0
-  score_add: 0
-  gameover: 0
+  game_over: 0
 --- !u!1 &1270995009
 GameObject:
   m_ObjectHideFlags: 0
@@ -1783,7 +1783,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c00812f1bacfc440bd43524e6883e23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0
 --- !u!1 &1772403772
 GameObject:
   m_ObjectHideFlags: 0

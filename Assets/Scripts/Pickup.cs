@@ -10,7 +10,7 @@ public class Pickup : MonoBehaviour
     void Start()
     {
         rb = this.GetComponent<Rigidbody2D>();
-        rb.velocity = new Vector2(0, -GameSpeed.instance.gameSpeed + 1);
+        rb.velocity = new Vector2(0, -GameSpeed.instance.gameSpeed + 0.5f);
         deletepoint = GameObject.Find("Deletepoint");
     }
 

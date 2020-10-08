@@ -8,6 +8,7 @@ public class Score : MonoBehaviour
     public static Score instance;
     public int score_value;
     private TextMeshProUGUI score_text;
+    public bool game_over;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,10 +21,13 @@ public class Score : MonoBehaviour
     void Update()
     {
         /* Update Score Text */
-        if (score_value <= 0)
+        if (!game_over)
         {
-            score_value = 0;
+            if (score_value <= 0)
+            {
+                score_value = 0;
+            }
+            score_text.text = score_value.ToString();
         }
-        score_text.text = score_value.ToString();
     }
 }

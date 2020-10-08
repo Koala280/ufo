@@ -12,7 +12,7 @@ public class Asteroid : MonoBehaviour
     void Start()
     {
         rb = this.GetComponent<Rigidbody2D>();
-        rb.velocity = new Vector2(0, Random.Range(-GameSpeed.instance.gameSpeed / 3, -GameSpeed.instance.gameSpeed * 5f));
+        rb.velocity = new Vector2(0, Random.Range(-GameSpeed.instance.gameSpeed / 4, -GameSpeed.instance.gameSpeed * 3f));
         deletepoint = GameObject.Find("Deletepoint");
     }
 

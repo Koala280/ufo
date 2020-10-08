@@ -9,7 +9,7 @@ public class PlayerManager : MonoBehaviour
     public Transform firePoint;
     public GameObject bullet_1_prefab;
     public GameObject bullet_2_prefab;
-    public GameObject star_prefab;
+    public GameObject star_picked_prefab;
     private float raygun_cd_left = 0;
     private float raygun_shooting_repeat_rate;
     private float raygun_cooldown;
@@ -30,7 +30,7 @@ public class PlayerManager : MonoBehaviour
         raygun_cooldown = PlayerPrefs.GetFloat("raygun_cooldown", 10.0f);
 
         /* TODO */
-        star_speed = PlayerPrefs.GetFloat("star_speed", 10.0f);
+        star_speed = PlayerPrefs.GetFloat("star_speed", 7.0f);
         star_cooldown = PlayerPrefs.GetFloat("star_cooldown", 10.0f);
     }
 
@@ -44,8 +44,10 @@ public class PlayerManager : MonoBehaviour
         if (star_cd_left >= 0)
         {
             star_cd_left -= Time.deltaTime;
+
             if (star_cd_left <= 0)
             {
+                Destroy(star_picked_prefab);
                 GameSpeed.instance.gameSpeed -= star_speed;
                 supermode = false;
             }
@@ -72,8 +74,10 @@ public class PlayerManager : MonoBehaviour
 
     void Star_attack()
     {
+        Instantiate(star_picked_prefab, transform.position, transform.rotation);
         GameSpeed.instance.gameSpeed += star_speed;
         supermode = true;
+        star_picked_prefab = GameObject.Find("Star_Picked_Prefab Variant(Clone)");
     }
 
     private void Raygun_shoot()
@@ -92,6 +96,7 @@ public class PlayerManager : MonoBehaviour
     {
         if (col.gameObject.tag.Equals("Asteroid"))
         {
+            /* If star_attack activated unkillable */
             if (!supermode)
             {
                 this.GameOver();
@@ -143,5 +148,6 @@ public class PlayerManager : MonoBehaviour
         }
 
         PlayerPrefs.SetInt("money", PlayerPrefs.GetInt("money", 0) + Score.instance.score_value);
+        Score.instance.game_over = true;
     }
 }
