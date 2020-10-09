@@ -163,7 +163,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &4889522
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -415,12 +415,6 @@ MonoBehaviour:
   gameOverText: {fileID: 82705930}
   restartButton: {fileID: 1270995009}
   mainMenuButton: {fileID: 384690124}
-  firePoint: {fileID: 1415033567}
-  bullet_1_prefab: {fileID: 287370730400357127, guid: d25ae77bb5d4a5e4e95a07cfe96dd32c,
-    type: 3}
-  bullet_2_prefab: {fileID: 0}
-  star_picked_prefab: {fileID: 3795930228927904783, guid: db930ec22e6550f4497e8e01a50364a1,
-    type: 3}
 --- !u!114 &4889527
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -433,7 +427,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f82372674b0e21040bec3cd19f44d998, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraBottom: {fileID: 2125808603}
+  cameraBottom: {fileID: 0}
   gameSpeed: 0
   speedCameraPosition: 0
   speed_playerposition: 0
@@ -917,8 +911,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 2125808604}
+  m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -939,6 +932,7 @@ MonoBehaviour:
   - {fileID: 2138269332925303447, guid: d1ec891460cf0aa42abd8d2c2feabfef, type: 3}
   weapon_prefabs:
   - {fileID: 5581193685041413311, guid: 6be9a6226897adf448063408fb186d78, type: 3}
+  - {fileID: 205633364510221482, guid: 9af809ecaf1d1214aa199cb5bbfdd411, type: 3}
 --- !u!1 &564054430
 GameObject:
   m_ObjectHideFlags: 0
@@ -1948,33 +1942,3 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!1 &2125808603
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2125808604}
-  m_Layer: 0
-  m_Name: Deletepoint
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2125808604
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2125808603}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -7.71, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 519420032}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
