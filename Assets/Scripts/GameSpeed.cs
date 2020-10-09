@@ -19,7 +19,7 @@ public class GameSpeed : MonoBehaviour
         /* Increase Background Movement Speed depending on y-achsis Position & Score*/
         if (gameSpeed < 8)
         {
-            gameSpeed = (Score.instance.score_value / 10000) + ((transform.position.y - cameraBottom.transform.position.y) / 2f);
+            gameSpeed = (Score.instance.score_value / 10000) + ((transform.position.y + 7.5f) / 2f);
         }
 
         if (gameSpeed < 2)

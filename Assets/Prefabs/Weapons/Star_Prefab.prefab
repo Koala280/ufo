@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7797074982182236511}
   - component: {fileID: 6426819832112020537}
   - component: {fileID: 7076606931237661138}
-  - component: {fileID: 8333047708689518020}
+  - component: {fileID: -8460287561625880593}
   m_Layer: 0
   m_Name: Star_Prefab
   m_TagString: Untagged
@@ -367,7 +367,7 @@ PolygonCollider2D:
       - {x: 0.76, y: -1.285}
       - {x: 0.78, y: -1.3149999}
       - {x: 0.78, y: -1.305}
---- !u!114 &8333047708689518020
+--- !u!114 &-8460287561625880593
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -376,6 +376,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 5581193685041413311}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c26192c81caea0449b6831d0b060ec0, type: 3}
+  m_Script: {fileID: 11500000, guid: 5693fd43ff4154a4786ab076eaba1c8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

@@ -41,7 +41,7 @@ public class Shop : MonoBehaviour
 
     public void UpgradeRaygun()
     {
-        /* till lvl 9. faster to fire is impossible */
+        /* lvl 9 is max faster to fire is impossible */
         if (money_value >= raygun_price && raygun_lvl < 10)
         {
             PlayerPrefs.SetFloat("raygun_cooldown", PlayerPrefs.GetFloat("raygun_cooldown", 10.0f) + 1.0f);
@@ -62,12 +62,11 @@ public class Shop : MonoBehaviour
 
     public void UpgradeStar()
     {
-        /* till lvl 9. faster to fire is impossible */
         if (money_value >= star_price)
         {
             /* Increase Star Running time and Size */
             PlayerPrefs.SetFloat("star_cooldown", PlayerPrefs.GetFloat("star_cooldown", 10.0f) + 1.0f);
-            PlayerPrefs.SetFloat("star_size", PlayerPrefs.GetFloat("star_size", 1.0f) + 0.05f);
+            PlayerPrefs.SetFloat("star_size", PlayerPrefs.GetFloat("star_size", 0.2f) + 0.05f);
 
             /* LVL Up the star */
             star_lvl += 1;

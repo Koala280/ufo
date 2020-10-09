@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 205633364510221486}
   - component: {fileID: 205633364510221483}
   - component: {fileID: 205633364510221484}
-  - component: {fileID: 205633364510221485}
+  - component: {fileID: 5724401251607496453}
   m_Layer: 0
-  m_Name: Raygun
+  m_Name: Raygun_Prefab
   m_TagString: Raygun
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -342,7 +342,7 @@ PolygonCollider2D:
       - {x: -1.9599999, y: -1.385}
       - {x: -2.1499999, y: -1.385}
       - {x: -2.1599998, y: -1.375}
---- !u!114 &205633364510221485
+--- !u!114 &5724401251607496453
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -351,6 +351,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 205633364510221482}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c26192c81caea0449b6831d0b060ec0, type: 3}
+  m_Script: {fileID: 11500000, guid: 91f97bf6130e2834892c4c801f33ee74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bullet_1_prefab: {fileID: 287370730400357127, guid: d25ae77bb5d4a5e4e95a07cfe96dd32c,
+    type: 3}
