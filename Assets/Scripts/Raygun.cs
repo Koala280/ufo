@@ -20,19 +20,19 @@ public class Raygun : MonoBehaviour
     }
 
 
-    void Update()
+    void FixedUpdate()
     {
         rb = this.GetComponent<Rigidbody2D>();
-        rb.velocity = new Vector2(0, -GameSpeed.instance.gameSpeed + 0.5f);
+        rb.velocity = new Vector2(0, -GameScript.instance.gameSpeed + 0.5f);
         if (transform.position.y < -7.5f)
         {
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.gameObject.name == "Player")
+        if (col.tag == "Player")
         {
             gameObject.SetActive(false);
             Start_Raygun();
@@ -54,7 +54,6 @@ public class Raygun : MonoBehaviour
         if (cooldown_left <= 0)
         {
             CancelInvoke("Raygun_shoot");
-            Destroy(gameObject);
         }
     }
 }

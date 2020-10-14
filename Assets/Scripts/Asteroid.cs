@@ -4,25 +4,49 @@ using UnityEngine;
 
 public class Asteroid : MonoBehaviour
 {
-    private Rigidbody2D rb;
-    private float speed;
+    private Rigidbody2D asteroid;
+    private Vector3 eulerAngleVelocity;
+    private Vector2 speed;
+    private float rotateSpeed;
+    private float size;
 
-    // Use this for initialization
-    void Start()
+    // TODO better in OnEnable or in Update???
+    void OnEnable()
     {
-        rb = this.GetComponent<Rigidbody2D>();
-        rb.velocity = new Vector2(0, Random.Range(-GameSpeed.instance.gameSpeed / 4, -GameSpeed.instance.gameSpeed * 3f));
+        asteroid = transform.GetComponent<Rigidbody2D>();
+        eulerAngleVelocity = new Vector3(0, 0, 100);
+        rotateSpeed = Random.Range(-3.0f, 3.0f);
+        MoveAsteroid();
+        SetAsteroidSize();
     }
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        /* TODO fallgeschwindigkeit erhöhen rb.velocity.y += 1 */
         if (transform.position.y < -7.5f)
         {
-            Destroy(this.gameObject);
+            DestroyAsteroid();
         }
+        RotateAsteroid();
+    }
 
+    void MoveAsteroid()
+    {
+        asteroid.velocity = transform.up * Random.Range(-GameScript.instance.gameSpeed / 4f, -GameScript.instance.gameSpeed * 3f);
+    }
 
+    void DestroyAsteroid()
+    {
+        gameObject.SetActive(false);
+    }
+
+    void RotateAsteroid()
+    {
+        asteroid.rotation += rotateSpeed;
+    }
+
+    void SetAsteroidSize()
+    {
+        size = Random.Range(0.09f, 0.17f);
+        transform.localScale = new Vector3(size, size, 0);
     }
 }

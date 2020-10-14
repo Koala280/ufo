@@ -5,14 +5,14 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     private Vector3 touchPosition;
-    private Rigidbody2D rb;
+    private Rigidbody2D player;
     private Vector3 direction;
     public float charMovementSpeed;
 
 
     private void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
+        player = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -26,11 +26,11 @@ public class PlayerMovement : MonoBehaviour
             touchPosition = Camera.main.ScreenToWorldPoint(touch.position);
             touchPosition.z = 0;
             direction = (touchPosition - transform.position);
-            rb.velocity = new Vector2(direction.x, direction.y) * charMovementSpeed;
+            player.velocity = new Vector2(direction.x, direction.y) * charMovementSpeed;
 
             if (touch.phase == TouchPhase.Ended)
             {
-                rb.velocity = Vector2.zero;
+                player.velocity = Vector2.zero;
             }
         }
     }

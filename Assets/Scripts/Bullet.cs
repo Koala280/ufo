@@ -10,14 +10,13 @@ public class Bullet : MonoBehaviour
 
     void Start()
     {
-        /* Move Bullet up */
+        screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
         rb.velocity = transform.up * speed;
     }
 
     void Update()
     {
-        screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
-        if (rb.position.y > screenBounds.y + 1)
+        if (rb.position.y > screenBounds.y + 2)
         {
             Destroy(gameObject);
         }
@@ -28,9 +27,13 @@ public class Bullet : MonoBehaviour
         if (col.gameObject.tag.Equals("Asteroid"))
         {
             Score.instance.score_value += 500;
-            Destroy(col.gameObject);
+            col.gameObject.SetActive(false);
             Destroy(gameObject);
         }
     }
 
+    void DestroyBullet()
+    {
+        gameObject.SetActive(false);
+    }
 }

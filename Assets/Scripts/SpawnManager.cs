@@ -5,40 +5,45 @@ using UnityEngine;
 public class SpawnManager : MonoBehaviour
 {
     private Vector2 screenBounds;
-    public GameObject[] asteroid_prefabs;
     private float asteroid_timer;
-    public GameObject[] weapon_prefabs;
     private float weapon_timer;
+    private Vector3 spawn_location;
+
+    void Start()
+    {
+        screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
+    }
 
     void Update()
     {
-        if (asteroid_timer < 0.0f)
+        if (GameScript.instance.game_running)
         {
-            spawnAsteroid();
-            asteroid_timer = Random.Range(0.2f, 1.5f);
-        }
+            if (asteroid_timer < 0)
+            {
+                SpawnItem("Asteroid");
+                asteroid_timer = Random.Range(0.2f, 1.5f);
+            }
 
-        if (weapon_timer < 0.0f)
-        {
-            spawnWeapon();
-            weapon_timer = Random.Range(17.0f, 50.0f);
-        }
+            if (weapon_timer < 0)
+            {
+                SpawnItem("Weapon");
+                weapon_timer = Random.Range(17.0f, 50.0f);
+            }
 
-        weapon_timer -= Time.deltaTime;
-        asteroid_timer -= Time.deltaTime;
-    }
-    
-    private void spawnAsteroid()
-    {
-        screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
-        GameObject asteroid = Instantiate(asteroid_prefabs[Random.Range(0, asteroid_prefabs.Length)]) as GameObject;
-        asteroid.transform.position = new Vector3(Random.Range(-screenBounds.x, screenBounds.x), screenBounds.y + 8, -7);
+            weapon_timer -= Time.deltaTime;
+            asteroid_timer -= Time.deltaTime;
+        }
     }
 
-    private void spawnWeapon()
+    private void SpawnItem(string tag)
     {
-        screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
-        GameObject weapon = Instantiate(weapon_prefabs[Random.Range(0, weapon_prefabs.Length)]) as GameObject;
-        weapon.transform.position = new Vector3(Random.Range(-screenBounds.x, screenBounds.x), screenBounds.y + 8, -7);
+        spawn_location = new Vector3(Random.Range(-screenBounds.x, screenBounds.x), 7, -7);
+        GameObject item = ObjectPooler.instance.GetPooledObject(tag);
+        if (item != null)
+        {
+            item.transform.position = spawn_location;
+            item.transform.rotation = Quaternion.identity;
+            item.SetActive(true);
+        }
     }
 }

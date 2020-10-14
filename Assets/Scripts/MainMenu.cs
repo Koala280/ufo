@@ -6,16 +6,21 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
 
-    public GameObject shop, settings, mainMenu;
+    public GameObject shop, settings, mainMenu, game, game_over;
 
     void Start()
     {
+        GameScript.instance.game_running = false;
         shop.SetActive(false);
         settings.SetActive(false);
+        game.SetActive(false);
+        game_over.SetActive(false);
     }
+
     public void EnterGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        GameScript.instance.game_running = true;
+        mainMenu.SetActive(false);
     }
 
     public void EnterShop()
@@ -34,12 +39,5 @@ public class MainMenu : MonoBehaviour
     {
         mainMenu.SetActive(true);
         settings.SetActive(false);
-
-    }
-
-    public void LeaveShop()
-    {
-        mainMenu.SetActive(true);
-        shop.SetActive(false);
     }
 }

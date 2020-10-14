@@ -18,49 +18,30 @@ public class Star : MonoBehaviour
         cooldown = PlayerPrefs.GetFloat("star_cooldown", 10.0f);
         size = PlayerPrefs.GetFloat("star_size", 0.2f);
     }
-    void Update()
+    void FixedUpdate()
     {
         if (transform.position.y < -7.5f)
         {
-            Destroy(gameObject);
+            DestroyStar();
         }
 
         if (cooldown_left > 0)
         {
-            cooldown_left -= Time.deltaTime;
-            transform.position = new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z - 1);
-            transform.Rotate(0, 0, 13);
-            transform.localScale = new Vector3(size, size, 0);
-
-            if (cooldown_left <= 0)
-            {
-                player.GetComponent<PolygonCollider2D>().enabled = true;
-                GameSpeed.instance.gameSpeed -= added_speed;
-                Destroy(gameObject);
-            }
+            RotateStarOnPlayer();
         }
         else
         {
             rb = this.GetComponent<Rigidbody2D>();
-            rb.velocity = new Vector2(0, -GameSpeed.instance.gameSpeed + 0.5f);
+            rb.velocity = new Vector2(0, -GameScript.instance.gameSpeed + 0.5f);
         }
     }
-
-    /* void OnCollisionEnter2D(Collision2D col)
-    {
-        if (col.gameObject.tag.Equals("Asteroid"))
-        {
-            Score.instance.score_value += 500;
-            Destroy(col.gameObject);
-        }
-    } */
 
     void OnTriggerEnter2D(Collider2D col)
     {
         if (col.gameObject.tag.Equals("Asteroid") && cooldown_left > 0)
         {
             Score.instance.score_value += 500;
-            Destroy(col.gameObject);
+            col.gameObject.SetActive(false);
         }
         if (col.gameObject.name == "Player")
         {
@@ -71,8 +52,27 @@ public class Star : MonoBehaviour
     public void Start_Star()
     {
         player.GetComponent<PolygonCollider2D>().enabled = false;
-        GameSpeed.instance.gameSpeed += added_speed;
+        GameScript.instance.gameSpeed += added_speed;
         cooldown_left += cooldown;
     }
 
+    void RotateStarOnPlayer()
+    {
+        cooldown_left -= Time.deltaTime;
+        transform.position = new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z - 1);
+        transform.Rotate(0, 0, 13);
+        transform.localScale = new Vector3(size, size, 0);
+
+        if (cooldown_left <= 0)
+        {
+            player.GetComponent<PolygonCollider2D>().enabled = true;
+            GameScript.instance.gameSpeed -= added_speed;
+            DestroyStar();
+        }
+    }
+
+    void DestroyStar()
+    {
+        gameObject.SetActive(false);
+    }
 }

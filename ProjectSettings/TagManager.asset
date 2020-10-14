@@ -5,8 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - Asteroid
-  - Weapon
   - Raygun
+  - Star
+  - Weapon
+  - Raygun_Bullet
   layers:
   - Default
   - TransparentFX
@@ -19,7 +21,7 @@ TagManager:
   - MainMenu
   - Shop
   - Settings
-  - 
+  - Game_Over
   - 
   - 
   - 
