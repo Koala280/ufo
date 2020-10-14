@@ -13,6 +13,7 @@ public class Settings : MonoBehaviour
         username = PlayerPrefs.GetString("username", "guest");
         usernameInput.text = username;
     }
+
     public void Apply()
     {
         if (string.IsNullOrEmpty(usernameInput.text))
@@ -22,6 +23,6 @@ public class Settings : MonoBehaviour
         {
             PlayerPrefs.SetString("username", usernameInput.text);
         }
-        
+        LayoutManager.instance.LeaveSettings();
     }
 }

@@ -5,11 +5,17 @@ using UnityEngine.SceneManagement;
 
 public class GameOver : MonoBehaviour
 {
-    public void restartGame() {
-        SceneManager.LoadScene("MainScene");
+    public GameObject player;
+
+    public void RestartGame()
+    {
+        ObjectPooler.instance.DeactivatePooledObjects();
+        LayoutManager.instance.EnterGame();
     }
 
-    public void goToMainMenu()  {
-        SceneManager.LoadScene("MainMenu");
+    public void EnterStartscreen()
+    {
+        ObjectPooler.instance.DeactivatePooledObjects();
+        LayoutManager.instance.EnterMenu();
     }
 }

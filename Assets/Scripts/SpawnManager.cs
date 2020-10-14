@@ -6,7 +6,7 @@ public class SpawnManager : MonoBehaviour
 {
     private Vector2 screenBounds;
     private float asteroid_timer;
-    private float weapon_timer;
+    public float weapon_timer;
     private Vector3 spawn_location;
 
     void Start()

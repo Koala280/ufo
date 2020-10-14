@@ -7,7 +7,7 @@ public class Score : MonoBehaviour
 {
     public static Score instance;
     public int score_value;
-    private TextMeshProUGUI score_text;
+    public TextMeshProUGUI score_text;
     public TextMeshProUGUI highscore_first;
     public TextMeshProUGUI highscore_second;
     public TextMeshProUGUI highscore_third;
@@ -15,7 +15,6 @@ public class Score : MonoBehaviour
     void Start()
     {
         instance = this;
-        score_text = GetComponent<TextMeshProUGUI>();
         UpdateHighscoreText();
     }
 

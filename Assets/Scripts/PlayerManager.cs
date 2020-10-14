@@ -5,15 +5,10 @@ using UnityEngine;
 public class PlayerManager : MonoBehaviour
 {
     public static PlayerManager instance;
-    public GameObject gameOverText, restartButton, mainMenuButton;
 
     private void Start()
     {
         instance = this;
-
-        gameOverText.SetActive(false);
-        restartButton.SetActive(false);
-        mainMenuButton.SetActive(false);
     }
 
     /* Game Over if collide with Tag: Asteroid */
@@ -27,10 +22,7 @@ public class PlayerManager : MonoBehaviour
 
     void GameOver()
     {
-        gameOverText.SetActive(true);
-        restartButton.SetActive(true);
-        mainMenuButton.SetActive(true);
-        gameObject.SetActive(false);
+        LayoutManager.instance.GameOver();
 
         Score.instance.UpdateHighscoreValue();
 
