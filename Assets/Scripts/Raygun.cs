@@ -51,7 +51,7 @@ public class Raygun : MonoBehaviour
         Instantiate(bullet_1_prefab, firePoint.transform.position, firePoint.transform.rotation);
         cooldown_left -= shooting_repeat_rate;
         /* When cooldown is ready stop loop */
-        if (cooldown_left <= 0)
+        if (cooldown_left <= 0 || !GameScript.instance.game_running)
         {
             CancelInvoke("Raygun_shoot");
         }

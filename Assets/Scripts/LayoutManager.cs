@@ -23,7 +23,7 @@ public class LayoutManager : MonoBehaviour
         game_over.SetActive(false);
         game.SetActive(true);
         player.SetActive(true);
-        player.transform.position = new Vector2(0, -2.75f);
+        player.transform.position = new Vector3(0, -2.75f, -10);
     }
 
     public void EnterShop()

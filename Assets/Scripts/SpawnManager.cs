@@ -27,11 +27,16 @@ public class SpawnManager : MonoBehaviour
             if (weapon_timer < 0)
             {
                 SpawnItem("Weapon");
-                weapon_timer = Random.Range(17.0f, 50.0f);
+                weapon_timer = Random.Range(17.0f, 40.0f);
             }
 
             weapon_timer -= Time.deltaTime;
             asteroid_timer -= Time.deltaTime;
+        }
+        else
+        {
+            weapon_timer = 0;
+            asteroid_timer = 0;
         }
     }
 
