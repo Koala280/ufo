@@ -20,6 +20,7 @@ public class ObjectPooler : MonoBehaviour
     {
         instance = this;
     }
+    
     void Start()
     {
         pooledObjects = new List<GameObject>();
@@ -65,7 +66,6 @@ public class ObjectPooler : MonoBehaviour
         for (int i = 0; i < pooledObjects.Count; i++)
         {
             pooledObjects[i].SetActive(false);
-
         }
     }
 }

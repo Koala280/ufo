@@ -24,7 +24,7 @@ public class Score : MonoBehaviour
         UpdateScore();
     }
 
-    public void UpdateHighscoreValue()
+    public void UpdateHighscore()
     {
         if (PlayerPrefs.GetInt("Highscore_first", 0) < score_value)
         {
@@ -52,6 +52,9 @@ public class Score : MonoBehaviour
 
             PlayerPrefs.SetString("Highscore_username_third", PlayerPrefs.GetString("username", "guest"));
         }
+
+        UpdateHighscoreText();
+        
     }
 
     void UpdateScore()

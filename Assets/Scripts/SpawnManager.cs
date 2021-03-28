@@ -27,7 +27,7 @@ public class SpawnManager : MonoBehaviour
             if (weapon_timer < 0)
             {
                 SpawnItem("Weapon");
-                weapon_timer = Random.Range(17.0f, 40.0f);
+                weapon_timer = Random.Range(20.0f, 40.0f);
             }
 
             weapon_timer -= Time.deltaTime;

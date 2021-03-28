@@ -24,7 +24,7 @@ public class PlayerManager : MonoBehaviour
     {
         LayoutManager.instance.GameOver();
 
-        Score.instance.UpdateHighscoreValue();
+        Score.instance.UpdateHighscore();
 
         PlayerPrefs.SetInt("money", PlayerPrefs.GetInt("money", 0) + Score.instance.score_value);
         Score.instance.score_value = 0;
