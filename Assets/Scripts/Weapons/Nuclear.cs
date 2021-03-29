@@ -55,7 +55,7 @@ public class Nuclear : MonoBehaviour
             asteroid.SetActive(false);
             Score.instance.score_value += 500;
         }
-        if (cooldown_left >= 1)
+        if (cooldown_left >= 0.3f)
         {
             Instantiate(explosion, Camera.main.ScreenToWorldPoint(new Vector3(Random.Range(0, Screen.width), Random.Range(0, Screen.height), 10)), Quaternion.identity);
         }
