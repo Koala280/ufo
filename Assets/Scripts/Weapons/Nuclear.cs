@@ -9,7 +9,8 @@ public class Nuclear : MonoBehaviour
     private float cooldown;
     private float cooldown_left;
     private float nuclear_activation_rate = 0.2f;
-        
+    public GameObject explosion;
+
     void Start()
     {
         cooldown = PlayerPrefs.GetFloat("nuclear_cooldown", 3.0f);
@@ -53,6 +54,10 @@ public class Nuclear : MonoBehaviour
         {
             asteroid.SetActive(false);
             Score.instance.score_value += 500;
+        }
+        if (cooldown_left >= 1)
+        {
+            Instantiate(explosion, Camera.main.ScreenToWorldPoint(new Vector3(Random.Range(0, Screen.width), Random.Range(0, Screen.height), 10)), Quaternion.identity);
         }
         if (cooldown_left <= 0 || !GameScript.instance.game_running)
         {

@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 2102864491017739530}
   - component: {fileID: 8351726563150279889}
   - component: {fileID: 823286197025908948}
-  - component: {fileID: 2090857217962742467}
   m_Layer: 9
   m_Name: Nuclear
   m_TagString: Weapon
@@ -118,6 +117,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 502a47ca23892b2449d0f7735c54ae9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  explosion: {fileID: 5179930186166714664, guid: b971ae7c71726de41ae7e8095379d492,
+    type: 3}
 --- !u!68 &823286197025908948
 EdgeCollider2D:
   m_ObjectHideFlags: 0
@@ -187,22 +188,3 @@ EdgeCollider2D:
   - {x: 4.6072884, y: 0.56848973}
   - {x: 4.812324, y: 0.2761101}
   - {x: 4.821779, y: 0.04635948}
---- !u!95 &2090857217962742467
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 112120769533183739}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: fb55e24de46be4345b08594511ac8e09, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0

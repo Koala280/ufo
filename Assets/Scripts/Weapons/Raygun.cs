@@ -43,6 +43,7 @@ public class Raygun : MonoBehaviour
     {
         cooldown_left += cooldown;
         InvokeRepeating("Raygun_shoot", 0, shooting_repeat_rate);
+        InvokeRepeating("Check_Game_Over", 0, 0.25f);
     }
 
     private void Raygun_shoot()
@@ -50,10 +51,25 @@ public class Raygun : MonoBehaviour
         /* Spawn Bullet */
         Instantiate(bullet_1_prefab, firePoint.transform.position, firePoint.transform.rotation);
         cooldown_left -= shooting_repeat_rate;
-        /* When cooldown is ready stop loop */
-        if (cooldown_left <= 0 || !GameScript.instance.game_running)
+        /* When cooldown is over stop loop */
+        if (cooldown_left <= 0)
         {
-            CancelInvoke("Raygun_shoot");
+            CancelInvokes();
         }
+    }
+
+    /* Fix so Raygun doesnt shoot next game if you restart too fast */
+    private void Check_Game_Over()
+    {
+        if (!GameScript.instance.game_running)
+        {
+            CancelInvokes();
+        }
+    }
+
+    private void CancelInvokes()
+    {
+        CancelInvoke("Raygun_shoot");
+        CancelInvoke("Check_Game_Over");
     }
 }
