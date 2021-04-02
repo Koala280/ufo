@@ -53,7 +53,7 @@ public class Nuclear : MonoBehaviour
         foreach (var asteroid in asteroids)
         {
             asteroid.SetActive(false);
-            Score.instance.score_value += 500;
+            Score.instance.AsteroidDestroyed();
         }
         if (cooldown_left >= 0.3f)
         {

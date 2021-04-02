@@ -8,9 +8,9 @@ public class Score : MonoBehaviour
     public static Score instance;
     public int score_value;
     public TextMeshProUGUI score_text;
-    public TextMeshProUGUI highscore_first;
-    public TextMeshProUGUI highscore_second;
-    public TextMeshProUGUI highscore_third;
+    public TextMeshProUGUI highscore1;
+    public TextMeshProUGUI highscore2;
+    public TextMeshProUGUI highscore3;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,32 +26,40 @@ public class Score : MonoBehaviour
 
     public void UpdateHighscore()
     {
-        if (PlayerPrefs.GetInt("Highscore_first", 0) < score_value)
+        /* If new Highscore */
+        if (PlayerPrefs.GetInt("highscore1", 0) < score_value)
         {
-            PlayerPrefs.SetInt("Highscore_third", PlayerPrefs.GetInt("Highscore_second", 0));
-            PlayerPrefs.SetInt("Highscore_second", PlayerPrefs.GetInt("Highscore_first", 0));
-            PlayerPrefs.SetInt("Highscore_first", score_value);
 
-            PlayerPrefs.SetString("Highscore_username_third", PlayerPrefs.GetString("Highscore_username_second", "guest"));
-            PlayerPrefs.SetString("Highscore_username_second", PlayerPrefs.GetString("Highscore_username_first", "guest"));
-            PlayerPrefs.SetString("Highscore_username_first", PlayerPrefs.GetString("username", "guest"));
+            PlayerPrefs.SetInt("highscore3", PlayerPrefs.GetInt("highscore2", 0));
+            PlayerPrefs.SetInt("highscore2", PlayerPrefs.GetInt("highscore1", 0));
+            PlayerPrefs.SetInt("highscore1", score_value);
+
+            PlayerPrefs.SetString("highscore3_username", PlayerPrefs.GetString("highscore2_username", "guest"));
+            PlayerPrefs.SetString("highscore2_username", PlayerPrefs.GetString("highscore1_username", "guest"));
+            PlayerPrefs.SetString("highscore1_username", PlayerPrefs.GetString("username", "guest"));
+            GPGSLeaderboard.UpdateLeaderboardScore(score_value);
         }
 
-        if (PlayerPrefs.GetInt("Highscore_second", 0) < score_value && PlayerPrefs.GetInt("Highscore_first", 0) > score_value)
+        /* If new Second Place */
+        if (PlayerPrefs.GetInt("highscore2", 0) < score_value && PlayerPrefs.GetInt("highscore1", 0) > score_value)
         {
-            PlayerPrefs.SetInt("Highscore_third", PlayerPrefs.GetInt("Highscore_second", 0));
-            PlayerPrefs.SetInt("Highscore_second", score_value);
 
-            PlayerPrefs.SetString("Highscore_username_third", PlayerPrefs.GetString("Highscore_username_second", "guest"));
-            PlayerPrefs.SetString("Highscore_username_second", PlayerPrefs.GetString("username", "guest"));
+            PlayerPrefs.SetInt("highscore3", PlayerPrefs.GetInt("highscore2", 0));
+            PlayerPrefs.SetInt("highscore2", score_value);
+
+            PlayerPrefs.SetString("highscore3_username", PlayerPrefs.GetString("highscore2_username", "guest"));
+            PlayerPrefs.SetString("highscore2_username", PlayerPrefs.GetString("username", "guest"));
         }
 
-        if (PlayerPrefs.GetInt("Highscore_third", 0) < score_value && PlayerPrefs.GetInt("Highscore_second", 0) > score_value)
+        if (PlayerPrefs.GetInt("highscore3", 0) < score_value && PlayerPrefs.GetInt("highscore2", 0) > score_value)
         {
-            PlayerPrefs.SetInt("Highscore_third", score_value);
 
-            PlayerPrefs.SetString("Highscore_username_third", PlayerPrefs.GetString("username", "guest"));
+            PlayerPrefs.SetInt("highscore3", score_value);
+
+            PlayerPrefs.SetString("highscore3_username", PlayerPrefs.GetString("username", "guest"));
         }
+
+        GPGSSaveGameState.instance.OpenSave(true);
 
         UpdateHighscoreText();
         
@@ -71,23 +79,29 @@ public class Score : MonoBehaviour
     }
 
     /* Get Top 3 Highscores and set the Highscore Text*/
-    void UpdateHighscoreText()
+    public void UpdateHighscoreText()
     {
-        int highscore_value_first = PlayerPrefs.GetInt("Highscore_first", 0);
-        int highscore_value_second = PlayerPrefs.GetInt("Highscore_second", 0);
-        int highscore_value_third = PlayerPrefs.GetInt("Highscore_third", 0);
+        int highscore1_value = PlayerPrefs.GetInt("highscore1", 0);
+        int highscore2_value = PlayerPrefs.GetInt("highscore2", 0);
+        int highscore3_value = PlayerPrefs.GetInt("highscore3", 0);
 
-        string highscore_username_first = PlayerPrefs.GetString("Highscore_username_first", "guest");
-        string highscore_username_second = PlayerPrefs.GetString("Highscore_username_second", "guest");
-        string highscore_username_third = PlayerPrefs.GetString("Highscore_username_third", "guest");
+        string highscore1_username = PlayerPrefs.GetString("highscore1_username", "guest");
+        string highscore2_username = PlayerPrefs.GetString("highscore2_username", "guest");
+        string highscore3_username = PlayerPrefs.GetString("highscore3_username", "guest");
 
-        highscore_first.SetText($"{highscore_username_first}: {highscore_value_first}");
-        highscore_second.SetText($"{highscore_username_second}: {highscore_value_second}");
-        highscore_third.SetText($"{highscore_username_third}: {highscore_value_third}");
+        highscore1.SetText($"{highscore1_username}: {highscore1_value}");
+        highscore2.SetText($"{highscore2_username}: {highscore2_value}");
+        highscore3.SetText($"{highscore3_username}: {highscore3_value}");
     }
 
     public void AddScore(int value)
     {
         score_value += value;
+    }
+
+    public void AsteroidDestroyed()
+    {
+        score_value += 500;
+        GPGSAchievements.IncrementAsteroidAchievement();
     }
 }

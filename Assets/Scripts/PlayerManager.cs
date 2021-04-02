@@ -22,13 +22,13 @@ public class PlayerManager : MonoBehaviour
 
     void GameOver()
     {
+        GameScript.instance.game_running = false;
+
         LayoutManager.instance.GameOver();
 
         Score.instance.UpdateHighscore();
 
         PlayerPrefs.SetInt("money", PlayerPrefs.GetInt("money", 0) + Score.instance.score_value);
-        Score.instance.score_value = 0;
-        
-        GameScript.instance.game_running = false;
+        Score.instance.score_value = 0;        
     }
 }

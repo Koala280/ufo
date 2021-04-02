@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class LayoutManager : MonoBehaviour
 {
     public static LayoutManager instance;
-    public GameObject shop, settings, menu, game, game_over, startscreen;
+    public GameObject shop, settings, menu, game, game_over, startscreen; //, test;
     public GameObject player;
 
     void Start()
@@ -37,6 +37,11 @@ public class LayoutManager : MonoBehaviour
         EnterMenu();
         shop.SetActive(false);
     }
+
+    /* public void enterTEST() {
+        menu.SetActive(false);
+        test.SetActive(true);
+    } */
 
     public void EnterSettings()
     {

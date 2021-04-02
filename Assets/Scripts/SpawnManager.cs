@@ -6,7 +6,7 @@ public class SpawnManager : MonoBehaviour
 {
     private Vector2 screenBounds;
     private float asteroid_timer;
-    public float weapon_timer;
+    private float weapon_timer;
     private Vector3 spawn_location;
 
     void Start()
@@ -21,13 +21,13 @@ public class SpawnManager : MonoBehaviour
             if (asteroid_timer < 0)
             {
                 SpawnItem("Asteroid");
-                asteroid_timer = Random.Range(0.2f, 1.5f);
+                asteroid_timer = Random.Range(0.2f, 2.5f);
             }
 
             if (weapon_timer < 0)
             {
                 SpawnItem("Weapon");
-                weapon_timer = Random.Range(20.0f, 40.0f);
+                weapon_timer = Random.Range(30.0f, 50.0f);
             }
 
             weapon_timer -= Time.deltaTime;

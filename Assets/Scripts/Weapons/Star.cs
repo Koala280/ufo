@@ -11,7 +11,7 @@ public class Star : MonoBehaviour
     private float cooldown;
     private float size;
     public float starMaxSize = 1.2f;
-    
+
     void Start()
     {
         player = GameObject.Find("Player");
@@ -46,7 +46,7 @@ public class Star : MonoBehaviour
     {
         if (col.gameObject.tag.Equals("Asteroid") && cooldown_left > 0)
         {
-            Score.instance.score_value += 500;
+            Score.instance.AsteroidDestroyed();
             col.gameObject.SetActive(false);
         }
         if (col.gameObject.name == "Player")

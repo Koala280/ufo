@@ -68,7 +68,7 @@ public class Shop : MonoBehaviour
             PlayerPrefs.SetInt("raygun_lvl", raygun_lvl);
             raygun_lvl_txt.SetText($"{raygun_lvl}");
 
-            /* Dexrease Money value */
+            /* Decrease Money value */
             money_value -= raygun_price;
             PlayerPrefs.SetInt("money", money_value);
             money_txt.SetText($"Current Value: {money_value}");
@@ -76,6 +76,8 @@ public class Shop : MonoBehaviour
             /* Get new Price */
             raygun_price = raygun_lvl * raygun_lvl_price;
             raygun_price_txt.SetText($"{raygun_price}");
+
+            GPGSSaveGameState.instance.OpenSave(true);
         }
     }
 
@@ -100,6 +102,8 @@ public class Shop : MonoBehaviour
             /* Update new Star price */
             star_price = star_lvl * star_lvl_price;
             star_price_txt.SetText($"{star_price}");
+
+            GPGSSaveGameState.instance.OpenSave(true);
         }
     }
 
@@ -124,6 +128,8 @@ public class Shop : MonoBehaviour
             /* Update new nuclear price */
             nuclear_price = nuclear_lvl * nuclear_lvl_price;
             nuclear_price_txt.SetText($"{nuclear_price}");
+
+            GPGSSaveGameState.instance.OpenSave(true);
         }
     }
 }
