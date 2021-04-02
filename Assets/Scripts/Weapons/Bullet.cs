@@ -5,18 +5,19 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     public float speed = 15f;
-    public Rigidbody2D rb;
+    private Rigidbody2D bullet;
     private Vector2 screenBounds;
 
     void Start()
     {
         screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
-        rb.velocity = transform.up * speed;
+        bullet = transform.GetComponent<Rigidbody2D>();
+        bullet.velocity = transform.up * speed;
     }
 
     void Update()
     {
-        if (rb.position.y > screenBounds.y + 2)
+        if (bullet.position.y > screenBounds.y + 2)
         {
             //TODO OBJECTPOOLER
             Destroy(gameObject);
