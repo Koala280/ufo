@@ -17,7 +17,7 @@ public class Background : MonoBehaviour
     {
         if (GameScript.instance.game_running)
         {
-            speed = (GameScript.instance.gameSpeed * Time.deltaTime) * 1.5f;
+            speed = (GameScript.instance.gameSpeed * Time.deltaTime) * 1.3f;
             transform.Translate(0, -speed, 0);
         }
         else
@@ -38,7 +38,7 @@ public class Background : MonoBehaviour
     {
         if (GameScript.instance.game_running)
         {
-            add_score = Mathf.RoundToInt(speed * 10);
+            add_score = Mathf.RoundToInt(speed * 5);
             if (add_score < 1)
             {
                 Score.instance.AddScore(1);

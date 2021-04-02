@@ -7,8 +7,8 @@ public class GPGSAuth : MonoBehaviour
 {
     public static GPGSAuth instance;
     public static PlayGamesPlatform platform;
-    public GameObject signInBTN;
-    public GameObject signOutBTN;
+    public GameObject[] signedInBTN;
+    public GameObject[] signedOutBTN;
     public static bool signedIn;
     
     void Start()
@@ -39,15 +39,27 @@ public class GPGSAuth : MonoBehaviour
             if (success)
             {
                 GPGSAchievements.UnlockSignInAchievement();
-                signInBTN.SetActive(false);
-                signOutBTN.SetActive(true);
+                foreach (var btn in signedInBTN)
+                {
+                    btn.SetActive(true);
+                }
+                foreach (var btn in signedOutBTN)
+                {
+                    btn.SetActive(false);
+                }
                 GPGSSaveGameState.instance.OpenSave(false);
                 Debug.Log("Logged in successfully!");
             }
             else
             {
-                signInBTN.SetActive(true);
-                signOutBTN.SetActive(false);
+                foreach (var btn in signedInBTN)
+                {
+                    btn.SetActive(false);
+                }
+                foreach (var btn in signedOutBTN)
+                {
+                    btn.SetActive(true);
+                }
                 Debug.Log("Failed to login: " + err);
             }
         });

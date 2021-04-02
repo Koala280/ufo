@@ -16,8 +16,6 @@ public class Asteroid : MonoBehaviour
         asteroid = transform.GetComponent<Rigidbody2D>();
         eulerAngleVelocity = new Vector3(0, 0, 100);
         rotateSpeed = Random.Range(-3.0f, 3.0f);
-        moveSpeed = Random.Range(-GameScript.instance.gameSpeed / 4f, -GameScript.instance.gameSpeed * 3f);
-        MoveAsteroid();
         SetAsteroidSize();
     }
 
@@ -27,22 +25,14 @@ public class Asteroid : MonoBehaviour
         {
             DestroyAsteroid();
         }
-        RotateAsteroid();
+        asteroid.rotation += rotateSpeed;
+        asteroid.velocity = transform.up * Random.Range(-GameScript.instance.gameSpeed / 4f, -GameScript.instance.gameSpeed * 3f) * Time.deltaTime;
     }
 
-    void MoveAsteroid()
-    {   
-        asteroid.velocity = transform.up * moveSpeed;
-    }
 
     void DestroyAsteroid()
     {
         gameObject.SetActive(false);
-    }
-
-    void RotateAsteroid()
-    {
-        asteroid.rotation += rotateSpeed;
     }
 
     void SetAsteroidSize()

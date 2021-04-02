@@ -21,7 +21,7 @@ public class GameScript : MonoBehaviour
         {
             if (gameSpeed < 8)
             {
-                gameSpeed = (Score.instance.score_value / 10000) + ((player.transform.position.y + 7.5f) / 2f);
+                gameSpeed = (Score.instance.score_value / 50000) + ((player.transform.position.y + 7.5f) / 2f);
             }
 
             if (gameSpeed < 2)

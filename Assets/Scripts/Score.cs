@@ -15,13 +15,17 @@ public class Score : MonoBehaviour
     void Start()
     {
         instance = this;
-        UpdateHighscoreText();
     }
 
     // Update is called once per frame
     void Update()
     {
         UpdateScore();
+    }
+
+    void OnEnable()
+    {
+        UpdateHighscoreText();
     }
 
     public void UpdateHighscore()
@@ -102,6 +106,7 @@ public class Score : MonoBehaviour
     public void AsteroidDestroyed()
     {
         score_value += 500;
+        //TODO COUNT ALL ASTEROIDS AND AFTER GAME ADD ALL
         GPGSAchievements.IncrementAsteroidAchievement();
     }
 }
