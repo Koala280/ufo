@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class LayoutManager : MonoBehaviour
+public class LayoutController : MonoBehaviour
 {
-    public static LayoutManager instance;
+    public static LayoutController instance;
     public GameObject shop, settings, menu, game, game_over, startscreen; //, test;
     public GameObject player;
 

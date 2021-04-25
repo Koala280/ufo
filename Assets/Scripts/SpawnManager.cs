@@ -21,7 +21,7 @@ public class SpawnManager : MonoBehaviour
             if (asteroid_timer < 0)
             {
                 SpawnItem("Asteroid");
-                asteroid_timer = Random.Range(0.2f, 2.5f);
+                asteroid_timer = 10; //Random.Range(0.2f, 2.5f);
             }
 
             if (weapon_timer < 0)

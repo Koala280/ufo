@@ -24,7 +24,7 @@ public class PlayerManager : MonoBehaviour
     {
         GameScript.instance.game_running = false;
 
-        LayoutManager.instance.GameOver();
+        LayoutController.instance.GameOver();
 
         Score.instance.UpdateHighscore();
 

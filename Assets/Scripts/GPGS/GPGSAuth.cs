@@ -9,12 +9,15 @@ public class GPGSAuth : MonoBehaviour
     public static PlayGamesPlatform platform;
     public GameObject[] signedInBTN;
     public GameObject[] signedOutBTN;
-    public static bool signedIn;
     
     void Start()
     {
         instance = this;
-        AuthenticateUser();
+        //AutoLogin only first time and if Autologin is activated
+        if (!PlayerPrefs.HasKey("GPGSSignIn") || PlayerPrefs.GetInt("GPGSSignIn") == 1)
+        {
+            AuthenticateUser();
+        }
     }
 
     public void AuthenticateUser()
@@ -34,8 +37,6 @@ public class GPGSAuth : MonoBehaviour
     {
         Social.Active.localUser.Authenticate((bool success, string err) =>
         {
-            signedIn = success;
-
             if (success)
             {
                 GPGSAchievements.UnlockSignInAchievement();
@@ -48,6 +49,7 @@ public class GPGSAuth : MonoBehaviour
                     btn.SetActive(false);
                 }
                 GPGSSaveGameState.instance.OpenSave(false);
+                PlayerPrefs.SetInt("GPGSSignIn", 1);
                 Debug.Log("Logged in successfully!");
             }
             else
@@ -60,6 +62,7 @@ public class GPGSAuth : MonoBehaviour
                 {
                     btn.SetActive(true);
                 }
+                PlayerPrefs.SetInt("GPGSSignIn", 0);
                 Debug.Log("Failed to login: " + err);
             }
         });
@@ -67,6 +70,7 @@ public class GPGSAuth : MonoBehaviour
 
     public void SignOut()
     {
+        PlayerPrefs.SetInt("GPGSSignIn", 0);
         PlayGamesPlatform.Instance.SignOut();
     }
 }

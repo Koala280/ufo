@@ -10,12 +10,12 @@ public class GameOver : MonoBehaviour
     public void RestartGame()
     {
         ObjectPooler.instance.DeactivatePooledObjects();
-        LayoutManager.instance.EnterGame();
+        LayoutController.instance.EnterGame();
     }
 
     public void EnterStartscreen()
     {
         ObjectPooler.instance.DeactivatePooledObjects();
-        LayoutManager.instance.EnterMenu();
+        LayoutController.instance.EnterMenu();
     }
 }

@@ -71,9 +71,23 @@ public class GPGSSaveGameState : MonoBehaviour
         PlayerPrefs.SetInt("nuclear_lvl", int.Parse(savedData[10]));
     }
 
+    private void decideWhichData()
+    {
+
+    }
+
     public void OpenSave(bool saving)
     {
-        Debug.Log("Open Save");
+        if (PlayerPrefs.GetInt("GPGSSignIn") == 0)
+        {
+            return;
+        }
+
+        if (!Social.localUser.authenticated)
+        {
+            GPGSAuth.instance.AuthenticateUser();
+        }
+
         if (Social.localUser.authenticated)
         {
             isSaving = saving;

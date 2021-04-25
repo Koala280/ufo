@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class Settings : MonoBehaviour
 {
@@ -14,6 +15,19 @@ public class Settings : MonoBehaviour
         usernameInput.text = username;
     }
 
+    public void ResetGameStats()
+    {
+        bool deleteCloudData = PlayerPrefs.GetInt("GPGSSignIn") == 1;
+        PlayerPrefs.DeleteAll();
+        if (deleteCloudData)
+        {
+            PlayerPrefs.SetInt("GPGSSignIn", 1);
+            GPGSSaveGameState.instance.OpenSave(true);
+            PlayerPrefs.DeleteAll();
+        }
+        SceneManager.LoadScene("MainScene");
+    }
+
     public void Apply()
     {
         if (string.IsNullOrEmpty(usernameInput.text))
@@ -23,6 +37,6 @@ public class Settings : MonoBehaviour
         {
             PlayerPrefs.SetString("username", usernameInput.text);
         }
-        LayoutManager.instance.LeaveSettings();
+        LayoutController.instance.LeaveSettings();
     }
 }

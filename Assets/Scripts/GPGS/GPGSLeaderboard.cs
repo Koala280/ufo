@@ -11,29 +11,22 @@ public class GPGSLeaderboard : MonoBehaviour
         {
             GPGSAuth.instance.AuthenticateUser();
         }
-        if (!GPGSAuth.signedIn)
-        {
-            GPGSAuth.instance.SignIn();
-        }
 
         Social.ShowLeaderboardUI();
     }
 
     public static void UpdateLeaderboardScore(long newScore)
     {
+        if (PlayerPrefs.GetInt("GPGSSignIn") == 0 || newScore == 0)
+        {
+            return;
+        }
+
         if (!Social.localUser.authenticated)
         {
             GPGSAuth.instance.AuthenticateUser();
         }
-        if (!GPGSAuth.signedIn)
-        {
-            GPGSAuth.instance.SignIn();
-        }
 
-        if (newScore == 0)
-        {
-            return;
-        }
 
         Social.ReportScore(newScore, GPGSIds.leaderboard_die_besten_flieger, (bool success) =>
         {
